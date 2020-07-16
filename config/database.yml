@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  # database: lone_worker11_new_1_may_dev
+  database: basic_develop
+  #database: hubhuman_dev4
+  username: postgres
+  password: postgres
+
+production:
+  <<: *default
+  database: basic_pro
+  username: postgres
+  password: postgres
+test:
+  <<: *default
+  database: basic_test
+  username: postgres
+  password: postgres
