@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::V1::ApplicationController
-	before_action :authorize_request, except: [:login, :register, :reset_password, :forgot_password]
+	before_action :authorize_request, except: [:login, :register, :forgot_password]
 
 	def register
 		begin
