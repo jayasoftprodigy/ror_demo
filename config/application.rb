@@ -22,13 +22,13 @@ module BasicApis
 
 	config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = {
-	  address: "smtp.webmail.com",
+	  address: "smtp.gmail.com",
 	  port: 587,
-	  domain: "webmail.com",
+	  domain: "gmail.com",
 	  authentication: "plain",
 	  enable_starttls_auto: true,
-	  user_name: "jaya_pandey@softprodigy.com",
-	  password: "c#o4RQaK#~*@"
+	  user_name: "username",
+	  password: "password"
 	}
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
