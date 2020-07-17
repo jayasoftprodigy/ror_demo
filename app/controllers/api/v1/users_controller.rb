@@ -88,7 +88,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 	def logout
 		begin
 			token = JsonWebToken.encode(user_id: @current_api_user.id, exp: Time.now.to_i)
-			render json: { token: nil , message: "logout successfully"}, status: :ok
+			render json: { token: token , message: "logout successfully"}, status: :ok
 		rescue Exception => e
 			error_handle_bad_request(e)
 		end
