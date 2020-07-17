@@ -72,8 +72,22 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 
 	def update_image
 		begin
-			raise "Please choose Image File" unless params[:image].present?
-			@current_api_user.update(image: params[:image])
+		raise "Please choose Image File" unless params[:image].present?
+		id =  ENV['AWS_ACCESS_KEY_ID']
+		secret_key = ENV['AWS_SECRET_ACCESS_KEY']
+		bucket_name = ENV['S3_BUCKET_NAME']
+		s3 = Aws::S3::Resource.new(credentials: Aws::Credentials.new(id, secret_key),
+	  region: 'us-east-1')
+
+		image_url = @current_api_user.image.split("com/")[1]
+		obj = s3.bucket(bucket_name).object(image_url)
+		obj.delete
+		image_name = params[:image].original_filename
+		obj = s3.bucket(bucket_name).object("users/images/#{@current_api_user.id}/#{image_name}")
+
+		obj.upload_file(params[:image].path)
+		@current_api_user.update(image: obj.public_url)
+		 
 			render :user
 		rescue Exception => e
 			error_handle_bad_request(e)
