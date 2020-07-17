@@ -4,8 +4,7 @@ Rails.application.routes.draw do
 		namespace :v1 do
 			resources :users, only: [:index] do
 				collection do
-					post "forgot_password"
-					post "reset_password"
+				  post "forgot_password"
 				  post "login"
 				  post "register"
 				  post "profile"
