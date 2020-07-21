@@ -18,6 +18,10 @@ gem 'jwt'
 gem 'rabl'
 gem 'figaro'
 gem 'carrierwave-aws'
+gem "httparty"
+gem 'open_uri_redirections'
+gem 'fcm'
+
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'

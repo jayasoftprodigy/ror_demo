@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 				collection do
 				  post "forgot_password"
 				  post "login"
+				  post "social_login"
 				  post "register"
 				  post "profile"
 				  get "get_user_profile"
