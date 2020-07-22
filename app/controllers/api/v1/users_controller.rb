@@ -8,6 +8,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 	    user_role = UserRole.find_by(role: params[:user][:role]) if params[:user][:role]
     	raise "Your role is not valid" unless user_role.present?
 	    user = User.create!(user_params)
+	    user.update(user_role_id: user_role.id)
 			token = JsonWebToken.encode(user_id: user.id)
 			render json: { token: token,
 			             user: user }, status: :ok
@@ -187,7 +188,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 	private
 
 	def user_params
-		params.require(:user).permit(:email, :password, :role)
+		params.require(:user).permit(:email, :password)
 	end
 
 	def profile_params
