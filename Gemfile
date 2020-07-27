@@ -21,6 +21,8 @@ gem 'carrierwave-aws'
 gem "httparty"
 gem 'open_uri_redirections'
 gem 'fcm'
+gem 'rack-cors'
+
 
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

@@ -8,13 +8,14 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 	    user_role = UserRole.find_by(role: params[:user][:role]) if params[:user][:role]
     	raise "Your role is not valid" unless user_role.present?
 	    user = User.create!(user_params)
+	    user.update(is_admin: true) if params[:user][:role].to_i == 2
 	    user.update(user_role_id: user_role.id)
 			token = JsonWebToken.encode(user_id: user.id)
 			render json: { token: token,
 			             user: user }, status: :ok
 		rescue Exception => e
       error_handle_bad_request(e)
-		end	
+		end
 	end
 
 	def login
@@ -30,7 +31,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 			end
 		rescue Exception => e
       error_handle_bad_request(e)
-		end	
+		end
 	end
 
 	def social_login
@@ -45,8 +46,8 @@ class Api::V1::UsersController < Api::V1::ApplicationController
                  user: @user }, status: :ok
 
     rescue Exception => e
-      error_handle_bad_request(e) 
-    end        
+      error_handle_bad_request(e)
+    end
   end
 
   def login_with_facebook(params, user_role)
@@ -98,7 +99,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
          password = Devise.friendly_token
           @user = User.new(:name=>full_name, :social_id=>google_id,:email=>email,:password=>password,user_role_id: user_role.id,login_with: "google")
         avatar_url_new = @user.process_uri(google_info[:picture])
-        @user.remote_image_url = avatar_url_new  
+        @user.remote_image_url = avatar_url_new
         @user.save
       else
         raise "access token  is invalid"
@@ -164,8 +165,8 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 
 		obj.upload_file(params[:image].path)
 		@current_api_user.update(image: obj.public_url)
-		 
-			render :user
+
+		render :user
 		rescue Exception => e
 			error_handle_bad_request(e)
 		end
@@ -173,7 +174,59 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 
 
 	def get_user_profile
+		@user = @current_api_user
 		render :user
+	end
+
+	def user_by_id
+		begin
+			return "User id is not present" unless params[:id].present?
+			user = User.find_by(id: params[:id])
+			return "Please enter a valid Id" unless user.present?
+			@user = user
+			render :user
+		rescue Exception => e		
+			error_handle_bad_request(e)	
+		end
+	end
+
+	def update_user_by_id
+		begin
+			return "User id is not present" unless params[:id].present?
+			user = User.find_by(id: params[:id])
+			return "Please enter a valid Id" unless user.present?
+			user_role = UserRole.find_by(role: params[:user][:role]) if params[:user][:role]
+    	raise "Your role is not valid" unless user_role.present?
+    	user.update(user_role_id: user_role.id)
+			user.update(profile_params)
+			@user = user
+			render :user
+		rescue Exception => e		
+			error_handle_bad_request(e)	
+		end
+	end
+
+	def delete_user
+		begin
+			return "User id is not present" unless params[:id].present?
+			user = User.find_by(id: params[:id])
+			return "Please enter a valid Id" unless user.present?
+			user.destroy
+			render json: {message: "Destroyed successfully"}, status: :ok
+		rescue Exception => e
+			error_handle_bad_request(e)
+		end
+	end
+
+
+	def get_all_users
+		begin
+			raise "Access denied" unless @current_api_user.is_admin
+			@users = User.all.where(is_admin: false)
+			render :users
+		rescue Exception => e
+			error_handle_bad_request(e)
+		end
 	end
 
 	def logout
@@ -188,7 +241,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 	private
 
 	def user_params
-		params.require(:user).permit(:email, :password)
+		params.require(:user).permit(:email, :password, :name)
 	end
 
 	def profile_params

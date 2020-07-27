@@ -7,11 +7,15 @@ class User < ApplicationRecord
 
 
   def user_role(role_id)
-  	 UserRole.find_by(id: role_id).try(:role_type)
+  	 role = UserRole.find_by(id: role_id).try(:role_type)
+     return role if role.present?
+     return ""
   end
 
   def role_by_id(user_role_id)
   	role = UserRole.find_by(id: user_role_id).try(:role)
+    return role if role.present?
+    return ""
   end
 
   def self.create_default_roles

@@ -14,6 +14,12 @@ Rails.application.routes.draw do
 				  post "change_password"
 				  get "get_image"
 				  post "update_image"
+				  get "get_all_users"
+				end
+				member do
+					get "user_by_id"
+					get "delete_user"
+					put "update_user_by_id"
 				end
 			end
 		end
