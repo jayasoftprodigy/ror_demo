@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 					get "user_by_id"
 					get "delete_user"
 					put "update_user_by_id"
+          post "update_image_by_id"
 				end
 			end
 		end

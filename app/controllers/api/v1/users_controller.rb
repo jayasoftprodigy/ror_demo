@@ -147,7 +147,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 		render :json => {image: @current_api_user.try(:image)}
 	end
 
-	def update_image
+	def update_image_by_id
 		begin
 		raise "Please choose Image File" unless params[:image].present?
 		id =  ENV['AWS_ACCESS_KEY_ID']
@@ -155,6 +155,33 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 		bucket_name = ENV['S3_BUCKET_NAME']
 		s3 = Aws::S3::Resource.new(credentials: Aws::Credentials.new(id, secret_key),
 	  region: 'us-east-1')
+		@user = User.find_by(id: params[:id])
+		return "Please enter a valid Id" unless @user.present?
+		if @user.try(:image).present?
+			image_url = @user.image.split("com/")[1]
+			obj = s3.bucket(bucket_name).object(image_url)
+			obj.delete
+		end
+		image_name = params[:image].original_filename
+		obj = s3.bucket(bucket_name).object("users/images/#{@user.id}/#{image_name}")
+
+		 obj.upload_file(params[:image].path)
+		@user.update(image: obj.public_url)
+
+		render :user
+		rescue Exception => e
+			error_handle_bad_request(e)
+		end
+	end
+
+	def update_image
+		begin
+		raise "Please choose Image File" unless params[:image].present?
+		id =  ENV['AWS_ACCESS_KEY_ID']
+		secret_key = ENV['AWS_SECRET_ACCESS_KEY']
+		bucket_name = ENV['S3_BUCKET_NAME']
+		s3 = Aws::S3::Resource.new(credentials: Aws::Credentials.new(id, secret_key),
+		region: 'us-east-1')
 		if @current_api_user.try(:image).present?
 			image_url = @current_api_user.image.split("com/")[1]
 			obj = s3.bucket(bucket_name).object(image_url)
@@ -185,8 +212,8 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 			return "Please enter a valid Id" unless user.present?
 			@user = user
 			render :user
-		rescue Exception => e		
-			error_handle_bad_request(e)	
+		rescue Exception => e
+			error_handle_bad_request(e)
 		end
 	end
 
@@ -201,8 +228,8 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 			user.update(profile_params)
 			@user = user
 			render :user
-		rescue Exception => e		
-			error_handle_bad_request(e)	
+		rescue Exception => e
+			error_handle_bad_request(e)
 		end
 	end
 
