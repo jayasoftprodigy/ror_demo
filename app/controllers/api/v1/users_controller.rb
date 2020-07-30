@@ -222,10 +222,13 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 			return "User id is not present" unless params[:id].present?
 			user = User.find_by(id: params[:id])
 			return "Please enter a valid Id" unless user.present?
+			raise "Email is already taken" unless user.id == params[:id].to_i
 			user_role = UserRole.find_by(role: params[:user][:role]) if params[:user][:role]
     	raise "Your role is not valid" unless user_role.present?
     	user.update(user_role_id: user_role.id)
+			user.update(password: params[:user][:password]) if params[:user][:password].present?
 			user.update(profile_params)
+
 			@user = user
 			render :user
 		rescue Exception => e
