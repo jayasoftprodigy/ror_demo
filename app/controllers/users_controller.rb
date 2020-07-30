@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def edit_password
   	  token = params[:token]
       password = params[:user][:password]
-      password_confirmation = params[:user][:password_confirmation]      
+      password_confirmation = params[:user][:password_confirmation]
     begin
       raise "confirm password can't be blank." if password_confirmation.blank?
       raise "Token is Invaild" unless token.present?
@@ -22,4 +22,7 @@ class UsersController < ApplicationController
 
   def update_successfully
   end
+
+	def index
+	end
 end
