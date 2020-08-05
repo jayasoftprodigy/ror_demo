@@ -81,7 +81,7 @@
 
       exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\na {\n  cursor: pointer;\n}\n.app-container {\n  min-height: 320px;\n  overflow: hidden;\n}\n.btn-delete-user {\n  width: 40px;\n  text-align: center;\n  box-sizing: content-box;\n}\n.edit_user {\n  width: 40px;\n  text-align: center;\n  box-sizing: content-box;\n  margin-top: 11px;\n}\n.create_user {\n  float: right;\n  margin: -45px;\n}\nselect#role {\n  margin: 41px 5px 4px 14px;\n  padding: 5px 7px 4px 9px;\n}\n.change_image {\n  padding: 40px 0px 0px 0px;\n}\na.btn.btn-sm.btn-primary.edit_profile {\n  float: right;\n  margin: -45px 50px 4px 4px;\n}\n.image_style {\n  margin: 16px;\n}\n", "", {
         "version": 3,
-        "sources": ["styles.less", "/home/jaya/Desktop/office_softprodigy/ror-ui/src/styles.less"],
+        "sources": ["styles.less", "/home/owner/Desktop/office_softprodigy/ror-ui/src/styles.less"],
         "names": [],
         "mappings": "AAAA,8EAA8E;ACC9E;EAAI,eAAA;ADEJ;ACAA;EACI,iBAAA;EACA,gBAAA;ADEJ;ACCA;EACI,WAAA;EACA,kBAAA;EACA,uBAAA;ADCJ;ACEA;EACI,WAAA;EACA,kBAAA;EACA,uBAAA;EACA,gBAAA;ADAJ;ACGA;EACI,YAAA;EACA,aAAA;ADDJ;ACIA;EACI,yBAAA;EACA,wBAAA;ADFJ;ACIA;EACI,yBAAA;ADFJ;ACIA;EACI,YAAA;EACA,0BAAA;ADFJ;ACKA;EACE,YAAA;ADHF",
         "file": "styles.less",
@@ -526,11 +526,11 @@
     /***/
     function _(module, exports, __webpack_require__) {
       __webpack_require__(
-      /*! /home/jaya/Desktop/office_softprodigy/ror-ui/node_modules/@angular/material/prebuilt-themes/indigo-pink.css */
+      /*! /home/owner/Desktop/office_softprodigy/ror-ui/node_modules/@angular/material/prebuilt-themes/indigo-pink.css */
       "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css");
 
       module.exports = __webpack_require__(
-      /*! /home/jaya/Desktop/office_softprodigy/ror-ui/src/styles.less */
+      /*! /home/owner/Desktop/office_softprodigy/ror-ui/src/styles.less */
       "./src/styles.less");
       /***/
     }
