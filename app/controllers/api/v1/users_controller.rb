@@ -1,5 +1,20 @@
 class Api::V1::UsersController < Api::V1::ApplicationController
+
+
 	before_action :authorize_request, except: [:login, :register, :forgot_password, :social_login]
+	swagger_controller :users, "User Managements"
+
+	swagger_api :register do
+			summary "Register"
+			notes "Create Account"
+			param :form, :"user[email]", :string, :required, "Valid Email address"
+		  param :form, :"user[password]", :string, :required, "password string"
+		  param_list :form, :"user[role]", :string, :required, "Role 0 for Customer and 1 for Staff", [ "0", "1" ]
+			response :bad_request
+		    response :unauthorized
+		    response :not_acceptable
+		    response :not_found
+	end
 
 	def register
 		begin
@@ -18,6 +33,18 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 		end
 	end
 
+	swagger_api :login do
+			summary "Login"
+			param :form, :"user[email]", :string, :required, "Valid Email address"
+		  param :form, :"user[password]", :string, :required, "password string"
+			param :form, :"user[device_id]", :string, "device id string"
+			param_list :form, :"user[device_type]", :string, "Select A for android and 1 for I for ios", [ "A", "I" ]
+			response :bad_request
+		    response :unauthorized
+		    response :not_acceptable
+		    response :not_found
+	end
+
 	def login
 		begin
 			user = User.find_by_email(params[:user][:email]) if params[:user][:email].present?
@@ -25,6 +52,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 	    raise "Password is incorrect" unless user.valid_password?(params[:user][:password])
 	    if user.present?
 		    token = JsonWebToken.encode(user_id: user.id)
+				user.update_attributes!(device_id: params[:user][:device_id], device_tpe: params[:user][:device_type], logout: false)
 				render json: { token: token,user: user }, status: :ok
 			else
 				render json: { message: 'unauthorized' }, status: :unauthorized
@@ -34,13 +62,26 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 		end
 	end
 
+	swagger_api :social_login do
+			summary "Social Login"
+			param_list :form, :"user[login_with]", :string, :required, [ "facebook", "google" ]
+		  param :form, :"user[token]", :string, :required, "Facebook or google token"
+			param :form, :"user[device_id]", :string, :required, "device id string"
+			param_list :form, :"user[device_type]", :string, :required, "A for android and 1 for I for ios", [ "A", "I" ]
+			param_list :form, :"user[role]", :string, :required, "Role 0 for Customer and 1 for Staff", [ "0", "1" ]
+			response :bad_request
+		    response :unauthorized
+		    response :not_acceptable
+		    response :not_found
+	end
+
 	def social_login
     begin
     	user_role = UserRole.find_by(role: params[:user][:role]) if params[:user][:role]
     	raise "Your role is not valid" unless user_role.present?
       login_with_facebook(params, user_role) if params[:user][:login_with] == "facebook"
       login_with_google(params, user_role) if params[:user][:login_with] == "google"
-      @user.update_attributes!(device_id: params[:user][:device_id],device_type: params[:user][:device_type])
+      @user.update_attributes!(device_id: params[:user][:device_id],device_type: params[:user][:device_type], logout: false)
      token = JsonWebToken.encode(user_id: @user.id)
       render json: { token: token,
                  user: @user }, status: :ok
@@ -107,6 +148,15 @@ class Api::V1::UsersController < Api::V1::ApplicationController
     end
   end
 
+	swagger_api :forgot_password do
+			summary "Forgot Password"
+			param :form, :"user[email]", :string, :required, "Enter Your Email"
+			response :bad_request
+		    response :unauthorized
+		    response :not_acceptable
+		    response :not_found
+	end
+
 	def forgot_password
 	  	begin
 				raise "Enter your email" unless params[:user][:email].present?
@@ -126,6 +176,17 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 		end
 	end
 
+	swagger_api :change_password do
+			summary "Change password"
+			param :header, 'Authorization', :string, :required, 'Enter Token'
+			param :form, :"user[old_password]", :string, :required, "Enter old password"
+		  param :form, :"user[new_password]", :string, :required, "Enter new password"
+			response :bad_request
+		    response :unauthorized
+		    response :not_acceptable
+		    response :not_found
+	end
+
 	def change_password
 		begin
 			raise "Please enter old password" unless params[:user][:old_password].present?
@@ -138,9 +199,32 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 			end
 	end
 
+	swagger_api :profile do
+			summary "Update profile"
+			notes "Update profile"
+			param :header, 'Authorization', :string, :required, 'Enter Token'
+			param :form, :"user[name]", :string, :required, "Enter Name"
+
+			response :bad_request
+		    response :unauthorized
+		    response :not_acceptable
+		    response :not_found
+	end
+
 	def profile
 	 @current_api_user.update(profile_params)
+	 @user = @current_api_user
 	 render :user
+	end
+
+	swagger_api :get_image do
+			summary "Get Image"
+			notes "Image Url"
+			param :header, 'Authorization', :string, :required, 'Enter Token'
+			response :bad_request
+		    response :unauthorized
+		    response :not_acceptable
+		    response :not_found
 	end
 
 	def get_image
@@ -151,6 +235,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 		begin
 		raise "Please choose Image File" unless params[:image].present?
 		id =  ENV['AWS_ACCESS_KEY_ID']
+
 		secret_key = ENV['AWS_SECRET_ACCESS_KEY']
 		bucket_name = ENV['S3_BUCKET_NAME']
 		s3 = Aws::S3::Resource.new(credentials: Aws::Credentials.new(id, secret_key),
@@ -199,6 +284,16 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 		end
 	end
 
+	swagger_api :get_user_profile do
+			summary "Get User profile"
+			notes "Profile details"
+			param :header, 'Authorization', :string, :required, 'Enter Token'
+			response :bad_request
+		    response :unauthorized
+		    response :not_acceptable
+		    response :not_found
+	end
+
 
 	def get_user_profile
 		@user = @current_api_user
@@ -236,6 +331,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 		end
 	end
 
+
 	def delete_user
 		begin
 			return "User id is not present" unless params[:id].present?
@@ -259,10 +355,20 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 		end
 	end
 
+	swagger_api :logout do
+			summary "logout"
+			notes "Delete session"
+			param :header, 'Authorization', :string, :required, 'Enter Token'
+			response :bad_request
+		    response :unauthorized
+		    response :not_acceptable
+		    response :not_found
+	end
+
 	def logout
 		begin
-			token = JsonWebToken.encode(user_id: @current_api_user.id, exp: Time.now.to_i)
-			render json: { token: token , message: "logout successfully"}, status: :ok
+			@current_api_user.update(logout: true)
+			render json: { message: "logout successfully"}, status: :ok
 		rescue Exception => e
 			error_handle_bad_request(e)
 		end

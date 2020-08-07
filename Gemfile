@@ -24,6 +24,7 @@ gem "httparty"
 gem 'open_uri_redirections'
 gem 'fcm'
 gem 'rack-cors'
+gem 'swagger-docs'
 
 
 

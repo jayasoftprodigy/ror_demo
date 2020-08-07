@@ -9,6 +9,7 @@ class Api::V1::ApplicationController < ActionController::API
       @decoded = JsonWebToken.decode(header)
       @current_api_user = User.find(@decoded[:user_id]) if @decoded.present?
       raise "User not Found" unless @current_api_user.present?
+      raise "Your session has been expired, please login again" if @current_api_user.logout
     rescue Exception => e
       render json: { errors: e.message }, status: :unauthorized
     rescue JWT::DecodeError => e
@@ -31,8 +32,8 @@ class Api::V1::ApplicationController < ActionController::API
     error_obj[:code] = 400
     error_obj[:message] = msg
     err_hash = {}
-    err_hash[:error] = error_obj 
+    err_hash[:error] = error_obj
     render :json => err_hash.to_json, status: :bad_request
-    
+
   end
 end
