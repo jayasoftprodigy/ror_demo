@@ -29,5 +29,6 @@ Rails.application.routes.draw do
 	  get 'users/update_successfully' => 'users#update_successfully'
     post 'users/edit_password' => 'users#edit_password'
     get '/admin' => 'users#index'
+    get '/' => 'users#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
