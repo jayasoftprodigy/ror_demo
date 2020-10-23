@@ -1,0 +1,506 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "https://rorapistaging.herokuapp.com",
+  "resourcePath": "users",
+  "apis": [
+    {
+      "path": "/api/v1/users/forgot_password",
+      "operations": [
+        {
+          "summary": "Forgot Password",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "user[email]",
+              "type": "string",
+              "description": "Enter Your Email",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "responseModel": null,
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#forgot_password",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/login",
+      "operations": [
+        {
+          "summary": "Login",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "user[email]",
+              "type": "string",
+              "description": "Valid Email address",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[password]",
+              "type": "string",
+              "description": "password string",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[device_id]",
+              "type": "string",
+              "description": null,
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user[device_type]",
+              "type": "string",
+              "description": [
+                "A",
+                "I"
+              ],
+              "required": false,
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+
+                ]
+              }
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "responseModel": null,
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#login",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/social_login",
+      "operations": [
+        {
+          "summary": "Social Login",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "user[login_with]",
+              "type": "string",
+              "description": [
+                "facebook",
+                "google"
+              ],
+              "required": true,
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+
+                ]
+              }
+            },
+            {
+              "paramType": "form",
+              "name": "user[token]",
+              "type": "string",
+              "description": "Facebook or google token",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[device_id]",
+              "type": "string",
+              "description": "device id string",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[device_type]",
+              "type": "string",
+              "description": "A for android and 1 for I for ios",
+              "required": true,
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+                  "A",
+                  "I"
+                ]
+              }
+            },
+            {
+              "paramType": "form",
+              "name": "user[role]",
+              "type": "string",
+              "description": "Role 0 for Customer and 1 for Staff",
+              "required": true,
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+                  "0",
+                  "1"
+                ]
+              }
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "responseModel": null,
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#social_login",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/register",
+      "operations": [
+        {
+          "summary": "Register",
+          "notes": "Create Account",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "user[email]",
+              "type": "string",
+              "description": "Valid Email address",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[password]",
+              "type": "string",
+              "description": "password string",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[role]",
+              "type": "string",
+              "description": "Role 0 for Customer and 1 for Staff",
+              "required": true,
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+                  "0",
+                  "1"
+                ]
+              }
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "responseModel": null,
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#register",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/profile",
+      "operations": [
+        {
+          "summary": "Update profile",
+          "notes": "Update profile",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Enter Token",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[name]",
+              "type": "string",
+              "description": "Enter Name",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "responseModel": null,
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#profile",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/get_user_profile",
+      "operations": [
+        {
+          "summary": "Get User profile",
+          "notes": "Profile details",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Enter Token",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "responseModel": null,
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#get_user_profile",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/logout",
+      "operations": [
+        {
+          "summary": "logout",
+          "notes": "Delete session",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Enter Token",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "responseModel": null,
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#logout",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/change_password",
+      "operations": [
+        {
+          "summary": "Change password",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Enter Token",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[old_password]",
+              "type": "string",
+              "description": "Enter old password",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[new_password]",
+              "type": "string",
+              "description": "Enter new password",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "responseModel": null,
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#change_password",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/get_image",
+      "operations": [
+        {
+          "summary": "Get Image",
+          "notes": "Image Url",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Enter Token",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "responseModel": null,
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#get_image",
+          "method": "get"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}
