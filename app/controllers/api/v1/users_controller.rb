@@ -64,7 +64,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 
 	swagger_api :social_login do
 			summary "Social Login"
-			param_list :form, :"user[login_with]", :string, :required, [ "facebook", "google" ]
+			param_list :form, :"user[login_with]", :string, :required,"facebook, google", [ "facebook", "google" ]
 		  param :form, :"user[token]", :string, :required, "Facebook or google token"
 			param :form, :"user[device_id]", :string, :required, "device id string"
 			param_list :form, :"user[device_type]", :string, :required, "A for android and 1 for I for ios", [ "A", "I" ]
