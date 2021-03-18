@@ -67,7 +67,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 			param_list :form, :"user[login_with]", :string, :required,"facebook, google", [ "facebook", "google" ]
 		  param :form, :"user[token]", :string, :required, "Facebook or google token"
 			param :form, :"user[device_id]", :string, :required, "device id string"
-			param_list :form, :"user[device_type]", :string, :required, [ "A", "I" ]
+			# param_list :form, :"user[device_type]", :string, :required, [ "A", "I" ]
 			param_list :form, :"user[role]", :string, :required, "Role 0 for Customer and 1 for Staff", [ "0", "1" ]
 			response :bad_request
 		    response :unauthorized
