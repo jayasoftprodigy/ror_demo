@@ -126,15 +126,13 @@
               "paramType": "form",
               "name": "user[login_with]",
               "type": "string",
-              "description": [
-                "facebook",
-                "google"
-              ],
+              "description": "facebook, google",
               "required": true,
               "allowableValues": {
                 "valueType": "LIST",
                 "values": [
-
+                  "facebook",
+                  "google"
                 ]
               }
             },
