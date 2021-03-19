@@ -136,7 +136,7 @@
             },
             {
               "paramType": "form",
-              "name": "user[token]",
+              "name": "user[access_token]",
               "type": "string",
               "description": "Facebook or google token",
               "required": true

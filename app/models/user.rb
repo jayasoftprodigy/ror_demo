@@ -75,12 +75,12 @@ class User < ApplicationRecord
     puts "user id---------->#{user.id}"
     user.notifications.create!(message: hsh[:message], details: hsh ,instance_id: hsh[:instance_id], noti_type: hsh[:noti_type])
     if self.notification_toogle.present?
-      if user.device_type == "A"
+      if user.device_tpe == "A"
         user.notification_android(hsh)
-        puts "android #{device_type}"
-      elsif user.device_type == "I"
+        puts "android #{device_tpe}"
+      elsif user.device_tpe == "I"
         user.notification_ios(hsh)
-        puts "ios #{device_type}"
+        puts "ios #{device_tpe}"
       end
     end
   end

@@ -65,7 +65,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 	swagger_api :social_login do
 			summary "Social Login"
 			param_list :form, :"user[login_with]", :string, :required,"facebook, google", [ "facebook", "google" ]
-		  param :form, :"user[token]", :string, :required, "Facebook or google token"
+		  param :form, :"user[access_token]", :string, :required, "Facebook or google token"
 			param :form, :"user[device_id]", :string, :required, "device id string"
 			param_list :form, :"user[device_type]", :string, :required, "A for android and 1 for I for ios", [ "A", "I" ]
 			param_list :form, :"user[role]", :string, :required, "Role 0 for Customer and 1 for Staff", [ "0", "1" ]
@@ -81,7 +81,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
     	raise "Your role is not valid" unless user_role.present?
       login_with_facebook(params, user_role) if params[:user][:login_with] == "facebook"
       login_with_google(params, user_role) if params[:user][:login_with] == "google"
-      @user.update_attributes!(device_id: params[:user][:device_id],device_type: params[:user][:device_type], logout: false)
+      @user.update_attributes!(device_id: params[:user][:device_id],device_tpe: params[:user][:device_type], logout: false)
      token = JsonWebToken.encode(user_id: @user.id)
       render json: { token: token,
                  user: @user }, status: :ok
@@ -126,7 +126,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 			google_info = User.connect_with_google(params[:user][:access_token])
       raise "Access token is invalid" if google_info[:error].present?
       email = google_info[:email].nil? ?  "" : google_info[:email]
-      user = User.find_by(email: google_info[:email]).present? if google_info[:email].present?
+      user = User.find_by(email: google_info[:email]) if google_info[:email].present?
       if user.present?
         @user = user
       elsif User.find_by(social_id: google_info[:id],login_with: params[:user][:login_with]).present?
@@ -134,8 +134,8 @@ class Api::V1::UsersController < Api::V1::ApplicationController
         raise  "Your role is not valid" if user_role != @user.user_role_idss
       elsif google_info[:error].blank?
         google_id = google_info[:id]
-        first_name = google_info[:first_name].nil? ? "" : google_info[:first_name]
-        last_name = google_info[:last_name].nil? ? "" : google_info[:last_name]
+        first_name = google_info[:given_name].nil? ? "" : google_info[:given_name]
+        last_name = google_info[:family_name].nil? ? "" : google_info[:family_name]
         full_name = first_name + " " + last_name
          password = Devise.friendly_token
           @user = User.new(:name=>full_name, :social_id=>google_id,:email=>email,:password=>password,user_role_id: user_role.id,login_with: "google")
