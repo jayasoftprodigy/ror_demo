@@ -38,7 +38,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 			param :form, :"user[email]", :string, :required, "Valid Email address"
 		  param :form, :"user[password]", :string, :required, "password string"
 			param :form, :"user[device_id]", :string, "device id string"
-			param_list :form, :"user[device_type]", :string, "Select A for android and 1 for I for ios", [ "A", "I" ]
+			param_list :form, :"user[device_type]", :string,:optional, "Select A for android and 1 for I for ios", [ "A", "I" ]
 			response :bad_request
 		    response :unauthorized
 		    response :not_acceptable

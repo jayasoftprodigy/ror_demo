@@ -76,15 +76,13 @@
               "paramType": "form",
               "name": "user[device_type]",
               "type": "string",
-              "description": [
-                "A",
-                "I"
-              ],
+              "description": "Select A for android and 1 for I for ios",
               "required": false,
               "allowableValues": {
                 "valueType": "LIST",
                 "values": [
-
+                  "A",
+                  "I"
                 ]
               }
             }
