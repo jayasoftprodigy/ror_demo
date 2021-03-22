@@ -20,7 +20,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 		begin
 			user = User.find_by_email(params[:user][:email]) if params[:user][:email].present?
 	      raise "Email is already exist" if user.present?
-	    user_role = UserRole.find_by(role: params[:user][:role]) if params[:user][:role]
+	    user_role = UserRole.find_by(role: params[:user][:role].to_i) if params[:user][:role]
     	raise "Your role is not valid" unless user_role.present?
 	    user = User.create!(user_params)
 	    user.update(is_admin: true) if params[:user][:role].to_i == 2

@@ -45,6 +45,9 @@ gem 'swagger-docs'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  #repsec is for test cases
+  gem 'rspec-rails', '~> 5.0.0'
+  gem "factory_bot_rails", '~> 6.1.0'
 end
 
 group :development do
