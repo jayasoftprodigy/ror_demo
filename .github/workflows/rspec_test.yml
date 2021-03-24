@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUBY_VERSION: 2.6.6
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ""
+      POSTGRES_USER: ENV["POSTGRES_USER"]
+      POSTGRES_PASSWORD: ENV["POSTGRES_PASSWORD"]
       POSTGRES_DB: basic_test
       RAILS_ENV: test
-      host: localhost
+      host: ENV["host"]
 
     services:
       postgres:
@@ -47,7 +47,7 @@ jobs:
       - name: Build and test with rspec
         env:
           RAILS_ENV: test
-          PGUSER: postgres
-          PGPASSWORD: ""
-          host: localhost
+          PGUSER: ENV["POSTGRES_USER"]
+          PGPASSWORD: ENV["POSTGRES_PASSWORD"]
+          host: ENV["host"]
         run: bundle exec rspec spec
