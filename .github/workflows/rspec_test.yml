@@ -37,17 +37,13 @@ jobs:
         working-directory: ${{env.api-dir}}
         run: |
           gem install bundler
-          bundle install --jobs 4 --retry 3
-      - name: HSTORE PROBLEM
-        working-directory: ${{env.api-dir}}
-        run: psql -d test_rspec_db -c 'create extension hstore;'  
+          bundle install --jobs 4 --retry 3 
       - name: Setup Database
         working-directory: ${{env.api-dir}}
-        env:
-          RAILS_ENV: test
-          PGHOST: localhost
-          PGUSER: postgres
-        run: bin/rails db:create db:migrate db:schema:load
+        run: | 
+            bin/rails db:create
+            psql -d test_rspec_db -c 'create extension hstore;'
+            rails db:migrate db:schema:load
 
       - name: Build and test with rspec
         working-directory: ${{env.api-dir}}
