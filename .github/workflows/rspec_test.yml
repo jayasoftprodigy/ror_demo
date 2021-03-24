@@ -1,0 +1,53 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
+# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+
+name: RSpec Tests
+on: [push, pull_request]
+jobs:
+  build:
+    name: CI
+    runs-on: ubuntu-latest
+    env:
+      RUBY_VERSION: 2.6.6
+      POSTGRES_USER: ENV["POSTGRES_USER"]
+      POSTGRES_PASSWORD: ENV["POSTGRES_PASSWORD"]
+      POSTGRES_DB: basic_test
+      RAILS_ENV: test
+      host: ENV["host"]
+
+    services:
+      postgres:
+        image: postgres:latest
+        ports: ["5432:5432"]
+     
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.6
+
+      - name: Install PostgreSQL
+        run: |
+         sudo apt-get -yqq install libpq-dev
+         sudo service postgresql restart
+         
+      - name: Run bundle install
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3 
+      - name: Setup Database
+        run: | 
+            bin/rails db:create RAILS_ENV=test
+            rails db:migrate RAILS_ENV=test
+
+      - name: Build and test with rspec
+        env:
+          RAILS_ENV: test
+          PGUSER: ENV["POSTGRES_USER"]
+          PGPASSWORD: ENV["POSTGRES_PASSWORD"]
+          host: ENV["host"]
+        run: bundle exec rspec spec
