@@ -17,6 +17,7 @@ jobs:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: basic_test
       RAILS_ENV: test
+      host: localhost
 
     services:
       postgres:
@@ -48,4 +49,5 @@ jobs:
           RAILS_ENV: test
           PGUSER: postgres
           PGPASSWORD: postgres
+          host: localhost
         run: bundle exec rspec spec
