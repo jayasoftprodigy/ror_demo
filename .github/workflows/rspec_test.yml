@@ -31,7 +31,6 @@ jobs:
 
       - name: Install PostgreSQL
         run: |
-           sudo apt-get update
            sudo apt-get install postgresql
            sudo su postgres
            psql -d postgres -U postgres
