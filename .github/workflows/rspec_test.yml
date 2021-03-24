@@ -15,7 +15,7 @@ jobs:
       RUBY_VERSION: 2.6.6
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: test_rspec_db
+      POSTGRES_DB: basic_test
       RAILS_ENV: test
 
     services:
