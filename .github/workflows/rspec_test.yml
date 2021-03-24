@@ -32,6 +32,7 @@ jobs:
       - name: Install PostgreSQL
         run: |
          sudo apt-get -yqq install libpq-dev
+         sudo service postgresql restart
          
       - name: Run bundle install
         run: |
