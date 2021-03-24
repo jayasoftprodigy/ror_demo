@@ -20,7 +20,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:lattest
+        image: postgres:latest
         ports: ["5432:5432"]
      
     steps:
