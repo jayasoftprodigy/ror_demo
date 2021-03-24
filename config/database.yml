@@ -21,5 +21,6 @@ production:
 test:
   <<: *default
   database: basic_test
-  username: postgres
-  password: postgres
+  host: ec2-54-152-175-141.compute-1.amazonaws.com
+  username: onauywcwfzthib
+  password: 08b59eeb26d136fccc9dc6b499cb1936da51c94a570627ef39155284f0cd888e
