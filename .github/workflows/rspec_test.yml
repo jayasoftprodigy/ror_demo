@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUBY_VERSION: 2.6.6
-      POSTGRES_USER: onauywcwfzthib
-      POSTGRES_PASSWORD: 08b59eeb26d136fccc9dc6b499cb1936da51c94a570627ef39155284f0cd888e
-      POSTGRES_DB: d9fo7q9u6ktlng
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: rorapi
       RAILS_ENV: test
-      host: ec2-54-152-175-141.compute-1.amazonaws.com
+      host: 182.75.88.146
 
     services:
       postgres:
