@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUBY_VERSION: 2.6.6
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ""
-      POSTGRES_DB: basic_test
+      POSTGRES_USER: onauywcwfzthib
+      POSTGRES_PASSWORD: 08b59eeb26d136fccc9dc6b499cb1936da51c94a570627ef39155284f0cd888e
+      POSTGRES_DB: d9fo7q9u6ktlng
       RAILS_ENV: test
-      host: ENV["host"]
+      host: ec2-54-152-175-141.compute-1.amazonaws.com
 
     services:
       postgres:
@@ -45,8 +45,4 @@ jobs:
             rails db:migrate RAILS_ENV=test
 
       - name: Build and test with rspec
-        env:
-          RAILS_ENV: test
-          PGUSER: postgres
-          host: ENV["host"]
         run: bundle exec rspec spec
