@@ -75,7 +75,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     context 'login with facebook' do
       it "facebook -> change access token whenever use" do
         user_role
-        get :social_login, params: {user: {login_with: "facebook", access_token: "EAAIHZCucRHIwBAHc8CStHZAf7tfFGEqZAElIb17uwFVu6TR0aZCzZB9A9qZC07jr0CjcY3tn4TxDD8lY8SRCfiQOnoqBtW7PwwYemaTQUvBFaAcJ7NpJcLjUM9kCt7TIa77ZCuZA8ZAbEsB0cQiq02iH6IKfG3mH50ZCWco0s08tzYYCAqRteSKybjuwk89QH1mcWGzsxPwro1NNsQrygLoR0iIHtbzpljIZABSHLvZBNsYsACD3K08BGCi1",
+        get :social_login, params: {user: {login_with: "facebook", access_token: "EAAIHZCucRHIwBAMGJdqT19Rl71s88Njm3dms3ekS62ycHKAz55gCmQEVT8QfsasMw7rOlxlMRBKIcwkT4ocXO7rLN4M4AZAb5R32qQLAmp1m37X7KcTgpF3XPkaGSWNR1cwYibVqHpFzNmXUIGQkJeIMZBlH8aHR7YtyZB7xtfbvJZCE7fj6WnUNhVkTZCzngtTyV9TSGGWubZAyygoiDj1nfJ9eZCOFjSMKZAL3rJKCpNQZDZD",
                                            device_id: "1", role: "0"}, headers: valid_headers(user.id)}
         expect(response).to have_http_status(:success)
       end
@@ -84,7 +84,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     context 'login with google' do
       it "google -> change access token whenever use " do
         user_role
-        get :social_login, params: {user: {login_with: "google", access_token: "ya29.a0AfH6SMC8cCu8SePbka5PTcw1tVBRJhrgxd8olTJ3atqNqbdpGYSv4v3bU0X9vBxj-rZt2i2FX9MdmZP6JQvgdikHlWyK7Wlhp1bt_R-vkjos9uapV8nyuOs9W0ibRablnZIi82YI0jNIKH2UzjMMthJFTP15",
+        get :social_login, params: {user: {login_with: "google", access_token: "ya29.a0AfH6SMACYqSEQh0Wm11UGJgiXSUfqo5kCTYKF_hxiHr5fhmo1U84G-ehcFAEixzQJpkMN-AiR8R-P6fpVWYLlKgrY2qGOrrfH7K9RuzUvRXBI88m21gQfKXIf1Md2nJ8RBf1O-w7jz_IlGKOGG7H2aezv115",
                                            device_id: "1", role: "0"}, headers: valid_headers(user.id)}
         expect(response).to have_http_status(:success)
       end
