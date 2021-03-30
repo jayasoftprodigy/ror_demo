@@ -1,11 +1,10 @@
 class Api::V1::ApplicationController < ActionController::API
 
-
   def authorize_request
     header = request.headers['Authorization']
     header = header.split(' ').last if header
     begin
-    	raise "Please enter Authorization in your headers" unless header.present?
+      raise "Please enter Authorization in your headers" unless header.present?
       @decoded = JsonWebToken.decode(header)
       @current_api_user = User.find(@decoded[:user_id]) if @decoded.present?
       raise "User not Found" unless @current_api_user.present?
@@ -17,8 +16,7 @@ class Api::V1::ApplicationController < ActionController::API
     end
   end
 
-
-	def error_handle_bad_request(msg)
+  def error_handle_bad_request(msg)
     puts "Exception Raised on #{Time.now} #{msg}"
     ary_errors = []
     ary_errors_obj = {}

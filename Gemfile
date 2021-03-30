@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -48,6 +50,10 @@ group :development, :test do
   #repsec is for test cases
   gem 'rspec-rails', '~> 5.0.0'
   gem "factory_bot_rails", '~> 6.1.0'
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
 end
 
 group :development do

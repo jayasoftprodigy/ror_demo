@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserMailer < ApplicationMailer
 	 def forgot_password_on_mail(detail)
     @user = detail[:user]
