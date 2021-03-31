@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUBY_VERSION: 2.6.6
+      RAILS_ENV: test
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: rorapi
-      RAILS_ENV: test
       host: 182.75.88.146
 
     services:
@@ -38,11 +38,15 @@ jobs:
       - name: Run bundle install
         run: |
           gem install bundler
-          bundle install --jobs 4 --retry 3 
+          bundle install --jobs 4 --retry 3
+
       - name: Setup Database
         run: | 
             bin/rails db:create RAILS_ENV=test
             rails db:migrate RAILS_ENV=test
+
+      - name: rubocop
+        run: bundle exec rubocop
 
       - name: Build and test with rspec
         run: bundle exec rspec spec
