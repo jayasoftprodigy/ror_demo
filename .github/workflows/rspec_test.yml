@@ -44,6 +44,13 @@ jobs:
         run:  rubocop
 
       - name: Setup Database
+        env:
+          RUBY_VERSION: 2.6.6
+          RAILS_ENV: test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: rorapi
+          host: 182.75.88.146
         run: | 
             rake db:create RAILS_ENV=test
             rake db:migrate RAILS_ENV=test
