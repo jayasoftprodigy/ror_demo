@@ -2,7 +2,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 
   before_action :authorize_request, except: [:login, :register, :forgot_password, :social_login]
   swagger_controller :users, 'User Managements'
-  load_and_authorize_resource except:[:login, :get_all_users, :get_user_profile]
+  load_and_authorize_resource except: [:login, :get_all_users, :get_user_profile]
 
   swagger_api :register do
     summary 'Register'
@@ -344,7 +344,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
   def get_all_users
     begin
       u_role = @current_api_user.user_role(@current_api_user.user_role_id)
-      raise 'Access denied' unless (@current_api_user.is_admin || u_role == 'Staff')
+      raise 'Access denied' unless @current_api_user.is_admin || u_role == 'Staff'
       @users = User.all.where(is_admin: false)
       render :users
     rescue Exception => e

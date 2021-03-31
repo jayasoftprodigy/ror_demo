@@ -82,7 +82,8 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   #   context 'login with facebook' do
   #     it 'facebook -> change access token whenever use' do
   #       user_role
-  #       get :social_login, params: { user: { login_with: 'facebook', access_token: 'EAAIHZCucRHIwBAMGJdqT19Rl71s88Njm3dms3ekS62ycHKAz55gCmQEVT8QfsasMw7rOlxlMRBKIcwkT4ocXO7rLN4M4AZAb5R32qQLAmp1m37X7KcTgpF3XPkaGSWNR1cwYibVqHpFzNmXUIGQkJeIMZBlH8aHR7YtyZB7xtfbvJZCE7fj6WnUNhVkTZCzngtTyV9TSGGWubZAyygoiDj1nfJ9eZCOFjSMKZAL3rJKCpNQZDZD',
+  #       get :social_login, params: { user: { login_with: 'facebook',
+  #                                          access_token: 'EAAIHZCucRHIwBAMGJdqT19Rl71s88Njm3dms3ekS62ycHKAz55gCmQEVT8QfsasMw7rOlxlMRBKIcwkT4ocXO7rLN4M4AZAb5R32qQLAmp1m37X7KcTgpF3XPkaGSWNR1cwYibVqHpFzNmXUIGQkJeIMZBlH8aHR7YtyZB7xtfbvJZCE7fj6WnUNhVkTZCzngtTyV9TSGGWubZAyygoiDj1nfJ9eZCOFjSMKZAL3rJKCpNQZDZD',
   #                                          device_id: '1', role: '0' }, headers: valid_headers(user.id) }
   #       expect(response).to have_http_status(:success)
   #     end
