@@ -18,6 +18,7 @@ jobs:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: rorapi2
       host: 182.75.88.146
+      pool: 5
 
     services:
       postgres:
