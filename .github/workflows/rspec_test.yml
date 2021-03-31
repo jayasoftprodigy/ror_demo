@@ -16,8 +16,8 @@ jobs:
       RAILS_ENV: test
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: rorapi
-      host: localhost
+      POSTGRES_DB: rorapi2
+      host: 182.75.88.146
 
     services:
       postgres:

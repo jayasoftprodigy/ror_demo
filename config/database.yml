@@ -20,7 +20,7 @@ production:
   password: 08b59eeb26d136fccc9dc6b499cb1936da51c94a570627ef39155284f0cd888e
 test:
   <<: *default
-  database: rorapi
-  host: localhost
+  database: rorapi2
+  host: 182.75.88.146
   username: postgres
   password: postgres
