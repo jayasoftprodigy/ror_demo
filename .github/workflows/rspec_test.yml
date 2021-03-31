@@ -40,13 +40,13 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
 
+      - name: rubocop
+        run:  rubocop
+
       - name: Setup Database
         run: | 
             bin/rails db:create RAILS_ENV=test
             rails db:migrate RAILS_ENV=test
-
-      - name: rubocop
-        run: bundle exec rubocop
 
       - name: Build and test with rspec
         run: bundle exec rspec spec
