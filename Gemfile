@@ -28,7 +28,8 @@ gem 'open_uri_redirections'
 gem 'fcm'
 gem 'rack-cors'
 gem 'swagger-docs'
-
+#it is an authorization library
+gem 'cancancan', '~> 3.2.1'
 
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

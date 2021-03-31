@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_authorization_check
+
   def update_password
     @user = User.new
   end

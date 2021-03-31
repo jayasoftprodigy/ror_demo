@@ -34,4 +34,12 @@ class Api::V1::ApplicationController < ActionController::API
     render :json => err_hash.to_json, status: :bad_request
 
   end
+
+  def current_ability
+    @current_ability ||= Ability.new(@current_api_user)
+  end
+
+  rescue_from CanCan::AccessDenied do |e|
+    raise e
+  end
 end
