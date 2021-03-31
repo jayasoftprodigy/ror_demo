@@ -21,6 +21,6 @@ production:
 test:
   <<: *default
   database: rorapi
-  host: 182.75.88.146
+  host: localhost
   username: postgres
   password: postgres
