@@ -22,5 +22,5 @@ test:
   <<: *default
   database: rorapi
   host: 182.75.88.146
-  username: postgres
+  username: root
   password: postgres
