@@ -45,8 +45,8 @@ jobs:
 
       - name: Setup Database
         run: | 
-            bin/rails db:create RAILS_ENV=test
-            rails db:migrate RAILS_ENV=test
+            rake db:create RAILS_ENV=test
+            rake db:migrate RAILS_ENV=test
 
       - name: Build and test with rspec
         run: bundle exec rspec spec
