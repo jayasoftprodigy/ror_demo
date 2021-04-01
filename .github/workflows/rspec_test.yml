@@ -14,8 +14,8 @@ jobs:
     env:
       RUBY_VERSION: 2.6.6
       RAILS_ENV: test
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: hnjfwer8t45whbrw789234r%435
       POSTGRES_DB: rorapi
       host: 182.75.88.146
 
