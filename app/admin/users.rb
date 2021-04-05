@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :name,:is_admin, :user_role_id
+  permit_params :email, :password, :name, :is_admin, :user_role_id
 
   index do
     column :email
@@ -13,7 +13,7 @@ ActiveAdmin.register User do
   filter :email
 
   form do |f|
-    f.inputs "user Details" do
+    f.inputs 'user Details' do
       f.input :name
       f.input :email
       f.input :is_admin
