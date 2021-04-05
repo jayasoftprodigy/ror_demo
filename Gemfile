@@ -32,7 +32,8 @@ gem 'jquery-rails'
 gem 'sassc'
 #it is an authorization library
 gem 'cancancan', '~> 3.2.1'
-gem 'activeadmin'
+#  its for creating elegant backends for website administration.
+gem 'activeadmin', '~> 2.9.0'
 
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
