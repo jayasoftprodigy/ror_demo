@@ -6,30 +6,30 @@ application up and running.
 
 * Installation
 
-  ## Clone this repo to your local machine using https://github.com/SoftprodigyIndia/ror-apis.git or download the zip file from https://github.com/SoftprodigyIndia/ror-apis/archive/master.zip
+  ### Clone this repo to your local machine using https://github.com/SoftprodigyIndia/ror-apis.git or download the zip file from https://github.com/SoftprodigyIndia/ror-apis/archive/master.zip
 
 * Setup
 
   - Run the following commands on your terminal to setup this project
-    ### "rvm use 2.7.0@ror-apis --create" to create gemset.
-    ### "bundle install" to install all the packages.
-    ### "rake db:create" to create the database.
-    ### "rake db:migrate" to run all the migrations.
-    ### "rake db:seed" to prepopulate the data in your database.
-    ### "bundle exec rails s" to start your rails server.
+    #### "rvm use 2.7.0@ror-apis --create" to create gemset.
+    #### "bundle install" to install all the packages.
+    #### "rake db:create" to create the database.
+    #### "rake db:migrate" to run all the migrations.
+    #### "rake db:seed" to prepopulate the data in your database.
+    #### "bundle exec rails s" to start your rails server.
 
 * Useful Links
 
-  ### Postman api collection: "/public/Basic_api_collection.postman_collection.json"
-  ### Also swagger test module in "your_app_url/api" (eg:- http://localhost:3000/api)
-  ### For demo
+  #### Postman api collection: "/public/Basic_api_collection.postman_collection.json"
+  #### Also swagger test module in "your_app_url/api" (eg:- http://localhost:3000/api)
+  #### For demo
     - website link:- "https://rorapistaging.herokuapp.com/"
     - Admin url :- "admin@admin.com"
     - Admin url :- "admin@123"
   
   
 * some useful gems
-# CanCanCan gem
+## CanCanCan gem
   CanCan is an authorization library for Ruby on Rails which restricts what resources a given user is allowed to access.
   All permissions are defined in a single location (the Ability class) and not duplicated across controllers, views, and database queries.
   
@@ -52,7 +52,7 @@ application up and running.
      3. Customer can manage their profile.
   
 
-  # Active Admin gem
+  ## Active Admin gem
   Active Admin is a Ruby on Rails framework for creating elegant backends for website administration.
  
 -Setup
@@ -72,7 +72,7 @@ application up and running.
   5. To register your first model, run:
      $> rails generate active_admin:resource ModelName(User)
      
-## active admin module in "your_app_url/api" (eg:- http://localhost:3000/admin)
+### active admin module in "your_app_url/api" (eg:- http://localhost:3000/admin)
     
   - website link:- "https://rorapistaging.herokuapp.com/admin"
   - Admin login :- "admin@example.com"
