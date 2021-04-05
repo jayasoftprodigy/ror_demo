@@ -11,3 +11,5 @@ puts 'Started==>'
 User.create_default_roles
 User.create(name: 'Admin', email: 'admin@admin.com', password: 'admin@123', user_role_id: 3, is_admin: true)
 puts 'End ==>'
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
