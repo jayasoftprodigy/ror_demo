@@ -25,11 +25,10 @@ jobs:
         ports: ["5432:5432"]
      
     steps:
-      - name: Setup Ruby, JRuby and TruffleRuby
       - uses: actions/checkout@v2
-      - uses: ruby/setup-ruby@v1.78.0
+      - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ruby-2.6.6
+          ruby-version: 2.6
 
       - name: Install PostgreSQL
         run: |
