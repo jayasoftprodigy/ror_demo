@@ -25,8 +25,8 @@ jobs:
         ports: ["5432:5432"]
      
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-ruby@v1
+      - name: Setup Ruby, JRuby and TruffleRuby
+      - uses: ruby/setup-ruby@v1.78.0
         with:
           ruby-version: ruby-2.6.6
 
